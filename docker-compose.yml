@@ -1,0 +1,36 @@
+# docker-compose.yml - proyek pertama
+
+version: "3.8"              # versi docker-compose
+
+services:                   # daftar service
+
+  item-db:                  # service node untuk DB
+    container_name: item-db # nama container DB
+    image: mongo:3          # image yg digunakan mongoDB ver 3
+    ports:                  # port mapping mongoDB dari container ke host
+      - "27017:27017"
+    networks:               # network yg sama supaya connected
+      - item-app-net
+    volumes:                # volume utk data supaya persistent
+      - "app-db:/data/db"
+    restart: on-failure     # restart node jika failure
+
+  item-app:                 # service node untuk aplikasi
+    container_name: item-app # nama container aplikasi
+    image: item-app:v1      # image yg digunakan item-app ver 1
+    ports:                  # port mapping container(8080) ke host(80)
+      - "80:8080"
+    networks:               # network yg sama supaya connected
+      - item-app-net
+    depends_on:             # menggunakan container item-db
+      - item-db
+    restart: on-failure     # restart node jika failure
+
+volumes:                    # volume untuk penyimpanan data persistent di host
+  app-db:
+    name: app-db            # nama volume
+
+networks:                   # jaringan item-app-net sebagai bridge (jembatan)
+  item-app-net:             #  supaya kedua container dapat terkoneksi
+    name: item-app-net      # nama jaringan
+    driver: bridge          # jenis jaringan
