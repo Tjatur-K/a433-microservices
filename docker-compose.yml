@@ -17,7 +17,7 @@ services:                   # daftar service
 
   item-app:                 # service node untuk aplikasi
     container_name: item-app # nama container aplikasi
-    image: item-app:v1      # image yg digunakan item-app ver 1
+    image: tjaturkg/item-app:v1  # image yg digunakan item-app ver 1
     ports:                  # port mapping container(8080) ke host(80)
       - "80:8080"
     networks:               # network yg sama supaya connected
