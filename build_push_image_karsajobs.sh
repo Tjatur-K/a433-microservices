@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Build Docker image dari berkas Dockerfile
+# Build Docker image dari berkas Dockerfile (karsajobs)
 docker build -t ghcr.io/tjatur-k/karsajobs:latest .
 
 # Login ke GitHub Packages
