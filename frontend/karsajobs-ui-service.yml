@@ -1,0 +1,21 @@
+# Versi API yang didefinisikan
+apiVersion: v1
+# Jenis objek Kubernetes (Service)
+kind: Service
+# Metadata untuk Service
+metadata:
+  # Nama Service
+  name: karsajobs-ui-service
+  # Label Service
+  labels:
+    app: frontend
+# Spesifikasi untuk Service
+spec:
+  # Tipe Service yang akan dibuat
+  type: NodePort
+  # Port yang akan dibuka pada Service
+  ports: 
+  - port: 8000
+  # Selektor untuk memilih pod yang akan dilayani oleh Service
+  selector:
+    app: frontend

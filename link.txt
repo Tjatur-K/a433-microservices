@@ -1,0 +1,11 @@
+Di Github Packages:
+https://github.com/users/Tjatur-K/packages/container/package/karsajobs
+https://github.com/users/Tjatur-K/packages/container/package/karsajobs-ui
+
+Repository di Github:
+https://github.com/Tjatur-K/a433-microservices/tree/karsajobs
+https://github.com/Tjatur-K/a433-microservices/tree/karsajobs-ui
+
+Image yg di DockerHub:
+https://hub.docker.com/r/tjaturkg/karsajobs
+https://hub.docker.com/r/tjaturkg/karsajobs-ui
