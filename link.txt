@@ -1,0 +1,12 @@
+Link Dockerhub:
+https://hub.docker.com/r/tjaturkg/order-service
+https://hub.docker.com/r/tjaturkg/shipping-service
+
+Link Github Repository:
+https://github.com/Tjatur-K/a433-microservices/tree/order-service
+https://github.com/Tjatur-K/a433-microservices/tree/shipping-service
+https://github.com/Tjatur-K/a433-microservices/tree/kubernetes-ecommerce
+
+Link Github Package:
+https://github.com/users/Tjatur-K/packages/container/package/order-service
+https://github.com/users/Tjatur-K/packages/container/package/shipping-service
