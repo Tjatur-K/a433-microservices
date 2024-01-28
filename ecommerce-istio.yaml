@@ -1,0 +1,51 @@
+# versi API yg digunakan
+apiVersion: networking.istio.io/v1alpha3
+# Jenis objek Kubernetes
+kind: Gateway
+# Metadata untuk Gateway
+metadata:
+  # Nama Gateway
+  name: ecommerce-gateway
+# Spesifikasi untuk Gateway
+spec:
+  # Selektor untuk memilih Gateway
+  selector:
+    # Gateway yg dipilih harus memiliki label sesuai
+    istio: ingressgateway # use istio default controller
+  # Server untuk Gateway
+  servers:
+    # Port & host pada Gateway Server 
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+# Versi API yg digunakan
+apiVersion: networking.istio.io/v1alpha3
+# Jeis objek Kubernetes (VirtualService)
+kind: VirtualService
+# Metadata untuk VirtualService
+metadata:
+  # Nama VirtualService
+  name: ecommerce
+# Spesifikasi untuk VirtualService
+spec:
+  # Host
+  hosts:
+  - "*"
+  # Gateway yg digunakan (sesuai yg diatas)
+  gateways:
+  - ecommerce-gateway
+  # URI yg dilayani / diproses yg memiliki akhiran /order
+  http:
+  - match:
+    - uri:
+        exact: /order
+    route:
+      # Service tujuan (order-service)
+    - destination:
+        host: order-service
+        port:
+          number: 3000
