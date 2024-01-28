@@ -43,6 +43,7 @@ spec:
           - containerPort: 3001
           # Environment variabel yg dibutuhkan oleh aplikasi
           env:
+            # Rabbitmq menggunakan yg dari bitnami
           - name: AMQP_URL
             value: amqp://user:iLYqViBLqhmQtk6V@mu-rabbit-rabbitmq.rabbit.svc.cluster.local:5672
 ---
