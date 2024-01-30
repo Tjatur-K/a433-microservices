@@ -1,44 +1,44 @@
-version: '2.1'
+version: '2.1'                        # versi docker-compose
 
-services:
-  order-service:
-    image: tjaturkg/order-service
-    container_name: order-service
-    ports:
+services:                             # daftar service
+  order-service:                      # service node untuk order-service
+    image: tjaturkg/order-service     # image yg digunakan
+    container_name: order-service     # nama container
+    ports:                            # port mapping dari container ke host
       - 3000:3000
-    depends_on:
+    depends_on:                       # tergantung pada service rabbitmq
       rabbitmq:
-        condition: service_healthy
-    links:
+        condition: service_healthy    # menunggu rabbitmq aktif
+    links:                            # link ke rabbitmq
       - rabbitmq
-    networks:
+    networks:                         # jaringan rabbitmq
       - rabbitmq_network
-  shipping-service:
-    image: tjaturkg/shipping-service
-    container_name: shipping-service
-    ports:
+  shipping-service:                   # service node untuk shipping-service
+    image: tjaturkg/shipping-service  # image yg digunakan
+    container_name: shipping-service  # nama container
+    ports:                            # port mapping dari container ke host
       - 3001:3001
-    depends_on:
+    depends_on:                       # tergantung pada service rabbitmq
       rabbitmq:
-        condition: service_healthy
-    links:
+        condition: service_healthy    # menunggu rabbitmq aktif
+    links:                            # link ke rabbitmq
       - rabbitmq
-    networks:
+    networks:                         # jaringan rabbitmq
       - rabbitmq_network  
-  rabbitmq:
-    image: rabbitmq:3.11-management
-    container_name: rabbitmq
-    ports:
-      - 5672:5672
-      - 15672:15672
-    volumes:
+  rabbitmq:                           # service node untuk rabbitmq
+    image: rabbitmq:3.11-management   # image yg digunakan
+    container_name: rabbitmq          # nama container
+    ports:                            # port mapping dari container ke host
+      - 5672:5672                     # untuk service
+      - 15672:15672                   # untuk management
+    volumes:                          # volume untuk penyimpanan data & log rabbitmq
       - ~/.docker-conf/rabbitmq/:/var/lib/rabbitmq
       - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
-    healthcheck:
+    healthcheck:                      # healthy jika "exit 0" (tanpa error)
       test: "exit 0"
-    networks:
+    networks:                         # jaringan rabbitmq
       - rabbitmq_network
     
-networks:
-  rabbitmq_network:
+networks:                              
+  rabbitmq_network:                   # jaringan rabbitmq bertipe bridge ke host
     driver: bridge
